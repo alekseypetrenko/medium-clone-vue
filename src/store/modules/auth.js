@@ -1,3 +1,5 @@
+import authApi from '@/api/auth';
+
 const state = {
   isSubmitting: false
 };
@@ -9,10 +11,17 @@ const mutations = {
 };
 
 const actions = {
-  register(context) {
-    setTimeout(() => {
-      context.commit('registerStart');
-    }, 1000);
+  register(context, credentials) {
+    return new Promise(() => {
+      authApi
+        .register(credentials)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(result => {
+          console.log('err', result);
+        });
+    });
   }
 };
 

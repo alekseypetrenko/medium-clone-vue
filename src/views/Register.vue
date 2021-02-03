@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register');
+      this.$store.dispatch('register', {name: 'a'});
     }
   }
 };
