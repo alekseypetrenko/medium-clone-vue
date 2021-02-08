@@ -3,23 +3,17 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign Up</h1>
+          <h1 class="text-xs-center">Sign In</h1>
           <p class="text-sx-center">
-            <router-link :to="{name: 'login'}">Have an account?</router-link>
+            <router-link :to="{name: 'register'}"
+              >Need an account??</router-link
+            >
           </p>
           <McvValidationErrors
             :validation-errors="validationErrors"
             v-if="validationErrors"
           />
-          <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Username"
-                v-model="username"
-              />
-            </fieldset>
+          <form @submit.prevent="onLogin">
             <fieldset class="form-group">
               <input
                 type="text"
@@ -36,11 +30,8 @@
                 v-model="password"
               />
             </fieldset>
-            <button
-              class="btn btn-lg btn-primary pull-xs-right"
-              :disabled="isSubmitting"
-            >
-              Sign Up
+            <button class="btn btn-lg btn-primary pull-xs-right">
+              Sign In
             </button>
           </form>
         </div>
@@ -57,38 +48,33 @@ export default {
   components: {
     McvValidationErrors
   },
-  name: 'McvRegister',
+  name: 'MvcLogin',
   data() {
     return {
       email: '',
-      password: '',
-      username: ''
+      password: ''
     };
   },
   computed: {
-    ...mapState({
-      isSubmitting: state => state.auth.isSubmitting,
-      validationErrors: state => state.auth.validationErrors
-    })
     // isSubmitting() {
     //   return this.$store.state.auth.isSubmitting;
     // },
     // validationErrors() {
     //   return this.$store.state.auth.validationErrors;
     // }
+    ...mapState({
+      isSubmitting: state => state.auth.isSubmitting,
+      validationErrors: state => state.auth.validationErrors
+    })
   },
   methods: {
-    onSubmit() {
+    onLogin() {
       this.$store
-        .dispatch(actionTypes.register, {
+        .dispatch(actionTypes.login, {
           email: this.email,
-          username: this.username,
           password: this.password
         })
-        .then(user => {
-          console.log('user is registered', user);
-          this.$router.push({name: 'Home'});
-        });
+        .then(() => this.$router.push({name: 'Home'}));
     }
   }
 };
