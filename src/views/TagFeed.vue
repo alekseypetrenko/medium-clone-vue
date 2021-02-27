@@ -20,16 +20,17 @@ import McvPopularTags from '@/components/PopularTags';
 import McvBanner from '@/components/Banner';
 
 export default {
-  name: 'McvGlobalFeed',
+  name: 'McvTagFeed',
   components: {
     McvFeed,
     McvPopularTags,
     McvBanner
   },
-  data() {
-    return {
-      apiUrl: '/articles'
-    };
+  computed: {
+    apiUrl() {
+      const tagName = this.$route.params.slug;
+      return `/articles?tag=${tagName}`;
+    }
   }
 };
 </script>

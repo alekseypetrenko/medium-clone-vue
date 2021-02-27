@@ -20,7 +20,7 @@ import McvPopularTags from '@/components/PopularTags';
 import McvBanner from '@/components/Banner';
 
 export default {
-  name: 'McvGlobalFeed',
+  name: 'McvYourFeed',
   components: {
     McvFeed,
     McvPopularTags,
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      apiUrl: '/articles'
+      apiUrl: '/articles/feed'
     };
   }
 };
